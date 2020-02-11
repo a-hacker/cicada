@@ -5,6 +5,7 @@ import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import createRootReducer from '../reducers';
 import * as ticketActions from '../actions/tickets';
+import * as jiraConfigActions from '../actions/jiraConfig';
 // import type { counterStateType, ticketsStateType } from '../reducers/types';
 
 const history = createHashHistory();
@@ -37,6 +38,7 @@ const configureStore = (initialState?: {}) => {
   // Redux DevTools Configuration
   const actionCreators = {
     ...ticketActions,
+    ...jiraConfigActions,
     ...routerActions
   };
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose

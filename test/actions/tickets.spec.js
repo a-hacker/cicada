@@ -1,5 +1,20 @@
-import { spy } from 'sinon';
+import { spy, stub } from 'sinon';
+import settings from 'electron-settings';
+import axios from 'axios';
 import * as actions from '../../app/actions/tickets';
+
+beforeAll(() => {
+  stub(settings, 'get').returns('testValue');
+  stub(axios, 'get').resolves({
+    data: {
+      issues: [
+        {
+          id: 'PROJ-1234'
+        }
+      ]
+    }
+  });
+});
 
 describe('actions', () => {
   it('should add new tickets', () => {
@@ -15,17 +30,19 @@ describe('actions', () => {
     const fn = actions.initialize();
     const dispatch = spy();
     fn(dispatch);
-    expect(dispatch.called).toBe(true);
-    expect(dispatch.firstCall.lastArg).toMatchObject({
-      type: actions.SET_TICKET
-    });
+    setTimeout(() => {
+      expect(dispatch.firstCall.lastArg).toMatchObject({
+        type: actions.SET_TICKET
+      });
+    }, 5);
   });
 
   it('should initialize by setting ticket with included ticket data', () => {
     const fn = actions.initialize();
     const dispatch = spy();
     fn(dispatch);
-    expect(dispatch.called).toBe(true);
-    expect(dispatch.firstCall.lastArg).toHaveProperty('context');
+    setTimeout(() => {
+      expect(dispatch.firstCall.lastArg).toHaveProperty('context');
+    }, 5);
   });
 });

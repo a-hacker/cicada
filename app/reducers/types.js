@@ -14,7 +14,13 @@ export type Ticket = {
   +key: string
 };
 
-export type GetState = () => counterStateType;
+export type JiraSettings = {
+  +host: string,
+  +username: string,
+  +token: string
+};
+
+export type GetState = () => ticketsStateType;
 
 export type Dispatch = ReduxDispatch<Action>;
 

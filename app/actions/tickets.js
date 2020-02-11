@@ -1,37 +1,42 @@
 // @flow
-// import axios from 'axios';
+import axios from 'axios';
+import settings from 'electron-settings';
 
 import type { Dispatch, Ticket } from '../reducers/types';
 
 export const SET_TICKET = 'SET_TICKET';
-// export const MODIFY_TICKET = 'MODIFY_TICKET'; // TODO: allow modifying the actual ticket
 
-export function initialize() {
+export function initialize(
+  jql: string = 'assignee = austin.hacker and status = "In Progress"'
+) {
+  const hostName = settings.get('host');
+  const username = settings.get('username');
+  const token = settings.get('token');
   return (dispatch: Dispatch) => {
-    // axios
-    //   .get(
-    //     `https://datarobot.atlassian.net/rest/api/latest/search?${jql ? 'jql=' + jql + '&' : ''}fields=id,key,description,summary,status`)
-    //   .then(response => {
-    //       response.data.issues.forEach(issue => {
-    //           dispatch(addTicket());
-    //       });
-    //   }).catch(reason => {
-    //   console.error("Couldn't do the thing.")
-    // });
-    const dummyTickets = [
-      {
-        summary: 'My First Ticket',
-        key: 'DM-1234'
-      },
-      {
-        summary: 'My Second Ticket',
-        key: 'DM-4321'
-      }
-    ];
-
-    dummyTickets.forEach(issue => {
-      dispatch(addTicket(issue));
-    });
+    axios
+      .get(
+        `${hostName}/rest/api/latest/search?${
+          jql.length > 0 ? `jql=${jql}&` : ''
+        }fields=id,key,description,summary,status`,
+        {
+          auth: {
+            username,
+            password: token
+          },
+          headers: {
+            'X-Atlassian-Token': 'nocheck'
+          }
+        }
+      )
+      .then(response => {
+        console.log(response);
+        return response.data.issues.forEach(issue => {
+          dispatch(addTicket(issue));
+        });
+      })
+      .catch(() => {
+        console.error("Couldn't do the thing.");
+      });
   };
 }
 

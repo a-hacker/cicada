@@ -1,30 +1,31 @@
-import React from 'react';
-import Enzyme, { mount } from 'enzyme';
+// import React from 'react';
+// import Enzyme, { mount } from 'enzyme';
+import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history';
-import { ConnectedRouter } from 'connected-react-router';
-import TicketsPage from '../../app/containers/TicketsPage';
-import { configureStore } from '../../app/store/configureStore';
-import { ElectronHttpExecutor } from 'electron-updater/out/electronHttpExecutor';
+// import { Provider } from 'react-redux';
+// import { createBrowserHistory } from 'history';
+// import { ConnectedRouter } from 'connected-react-router';
+// import TicketsPage from '../../app/containers/TicketsPage';
+// import { configureStore } from '../../app/store/configureStore';
+// import { ElectronHttpExecutor } from 'electron-updater/out/electronHttpExecutor';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-function setup(initialState) {
-  const store = configureStore(initialState);
-  const history = createBrowserHistory();
-  const provider = (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <TicketsPage />
-      </ConnectedRouter>
-    </Provider>
-  );
-  const app = mount(provider);
-  return {
-    app
-  };
-}
+// function setup(initialState) {
+//   const store = configureStore(initialState);
+//   const history = createBrowserHistory();
+//   const provider = (
+//     <Provider store={store}>
+//       <ConnectedRouter history={history}>
+//         <TicketsPage />
+//       </ConnectedRouter>
+//     </Provider>
+//   );
+//   const app = mount(provider);
+//   return {
+//     app
+//   };
+// }
 
 describe('containers', () => {
   describe('App', () => {

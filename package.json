@@ -267,6 +267,7 @@
     "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
     "electron-log": "^4.0.0",
+    "electron-settings": "^3.2.0",
     "electron-updater": "^4.2.0",
     "history": "^4.10.1",
     "react": "^16.12.0",
