@@ -7,7 +7,6 @@ import { Ticket } from '../reducers/types';
 
 type Props = {
   initialize: () => void,
-  addTicket: () => void,
   tickets: Array<Ticket>
 };
 
@@ -24,9 +23,9 @@ export default class Tickets extends Component<Props> {
 
     const ticketForms = tickets.map(ticket => (
       <form onSubmit={() => {}}>
-        <label>
+        <label htmlFor={`ticket-${ticket.key}`}>
           Key:
-          <input type="text" value={ticket.key} />
+          <input type="text" name={`ticket-${ticket.key}`} value={ticket.key} />
         </label>
         <input type="submit" value="Submit" />
       </form>

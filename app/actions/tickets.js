@@ -29,7 +29,6 @@ export function initialize(
         }
       )
       .then(response => {
-        console.log(response);
         return response.data.issues.forEach(issue => {
           dispatch(addTicket(issue));
         });
