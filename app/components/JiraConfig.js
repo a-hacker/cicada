@@ -29,6 +29,7 @@ export default class JiraConfig extends Component<Props> {
             value={jiraConfig.host}
           />
         </label>
+        <br />
         <label htmlFor="username">
           Username:
           <input
@@ -38,6 +39,7 @@ export default class JiraConfig extends Component<Props> {
             value={jiraConfig.username}
           />
         </label>
+        <br />
         <label htmlFor="token">
           API Token:
           <input

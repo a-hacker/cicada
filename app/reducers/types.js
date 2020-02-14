@@ -20,6 +20,15 @@ export type JiraSettings = {
   +token: string
 };
 
+export type Project = {
+  +projectName: string
+};
+
+export type ProjectSettings = {
+  +projects: Array<Project>,
+  +currentProject: Project
+};
+
 export type GetState = () => ticketsStateType;
 
 export type Dispatch = ReduxDispatch<Action>;
