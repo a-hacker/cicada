@@ -6,6 +6,8 @@ import { createLogger } from 'redux-logger';
 import createRootReducer from '../reducers';
 import * as ticketActions from '../actions/tickets';
 import * as jiraConfigActions from '../actions/jiraConfig';
+import * as projectsActions from '../actions/projects';
+import * as sidebarActions from '../actions/sidebar';
 // import type { counterStateType, ticketsStateType } from '../reducers/types';
 
 const history = createHashHistory();
@@ -38,6 +40,8 @@ const configureStore = (initialState?: {}) => {
   // Redux DevTools Configuration
   const actionCreators = {
     ...ticketActions,
+    ...projectsActions,
+    ...sidebarActions,
     ...jiraConfigActions,
     ...routerActions
   };
