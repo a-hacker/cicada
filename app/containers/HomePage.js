@@ -11,8 +11,9 @@ export default class HomePage extends Component<Props> {
   render() {
     return (
       <div>
-        <ProjectSidebar />
-        <Home />
+        <ProjectSidebar>
+          <Home />
+        </ProjectSidebar>
       </div>
     );
   }

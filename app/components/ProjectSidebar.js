@@ -23,7 +23,6 @@ export default class ProjectSidebar extends Component<Props> {
       toggleSidebar
     } = this.props;
 
-    console.log(projects);
     const projectsContent = projects.map((project, i) => (
       <div className="btn-group" id={`project-${i}`}>
         <button onClick={() => setProject(project.projectName)} type="button">
@@ -43,6 +42,7 @@ export default class ProjectSidebar extends Component<Props> {
         sidebar={projectsContent}
         open={sidebarOpen}
         onSetOpen={toggleSidebar}
+        sidebarId="project-sidebar"
         docked
       />
     );

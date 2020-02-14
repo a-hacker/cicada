@@ -3,7 +3,7 @@ import { ADD_PROJECT, SET_PROJECT } from '../actions/projects';
 import type { Action, ProjectSettings } from './types';
 
 export default function projects(
-  state: ProjectSettings = { projects: [], curentProject: '' },
+  state: ProjectSettings = { projects: [], currentProject: {} },
   action: Action
 ) {
   switch (action.type) {
@@ -15,7 +15,7 @@ export default function projects(
     case SET_PROJECT: {
       return {
         ...state,
-        curentProject: state.projects.find(
+        currentProject: state.projects.find(
           project => project.projectName === action.context.projectName
         )
       };
