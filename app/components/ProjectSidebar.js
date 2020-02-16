@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import Sidebar from 'react-sidebar';
 import { Project } from '../reducers/types';
 
@@ -8,10 +8,25 @@ type Props = {
   toggleSidebar: () => void,
   setProject: string => void,
   projects: Array<Project>,
-  sidebarOpen: boolean
+  sidebarOpen: boolean,
+  children: React.Node
 };
 
-export default class ProjectSidebar extends Component<Props> {
+const styles = {
+  sidebar: {
+    zIndex: 2,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    transition: 'transform .3s ease-out',
+    WebkitTransition: '-webkit-transform .3s ease-out',
+    willChange: 'transform',
+    overflowY: 'auto',
+    backgroundColor: '#0f0f0f'
+  }
+};
+
+export default class ProjectSidebar extends React.Component<Props> {
   props: Props;
 
   render() {
@@ -20,7 +35,8 @@ export default class ProjectSidebar extends Component<Props> {
       setProject,
       projects,
       sidebarOpen,
-      toggleSidebar
+      toggleSidebar,
+      children
     } = this.props;
 
     const projectsContent = projects.map((project, i) => (
@@ -43,8 +59,11 @@ export default class ProjectSidebar extends Component<Props> {
         open={sidebarOpen}
         onSetOpen={toggleSidebar}
         sidebarId="project-sidebar"
+        styles={styles}
         docked
-      />
+      >
+        {children}
+      </Sidebar>
     );
   }
 }

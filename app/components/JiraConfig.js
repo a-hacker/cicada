@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { JiraSettings } from '../reducers/types';
+import styles from './JiraConfig.css';
 
 type Props = {
   initializeSettings: () => void,
@@ -19,7 +20,7 @@ export default class JiraConfig extends Component<Props> {
   render() {
     const { saveSettings, jiraConfig } = this.props;
     return (
-      <form>
+      <form className={styles.settings}>
         <label htmlFor="host">
           Host:
           <input

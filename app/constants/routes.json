@@ -1,4 +1,5 @@
 {
   "HOME": "/",
-  "TICKETS": "/tickets"
+  "TICKETS": "/tickets",
+  "SETTINGS": "/settings"
 }
