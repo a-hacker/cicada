@@ -21,7 +21,9 @@ export type JiraSettings = {
 };
 
 export type Project = {
-  +projectName: string
+  +projectName: string,
+  +tickets: Array<Ticket>,
+  +issueFilter: ?string
 };
 
 export type ProjectSettings = {

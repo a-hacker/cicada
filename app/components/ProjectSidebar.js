@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Sidebar from 'react-sidebar';
 import { Project } from '../reducers/types';
+import routes from '../constants/routes.json';
 
 type Props = {
-  addProject: string => void,
   toggleSidebar: () => void,
   setProject: string => void,
   projects: Array<Project>,
@@ -31,7 +32,6 @@ export default class ProjectSidebar extends React.Component<Props> {
 
   render() {
     const {
-      addProject,
       setProject,
       projects,
       sidebarOpen,
@@ -48,9 +48,9 @@ export default class ProjectSidebar extends React.Component<Props> {
     ));
 
     projectsContent.push(
-      <button onClick={() => addProject('TEST')} type="button">
-        +
-      </button>
+      <Link to={routes.NEW_PROJECT}>
+        <button type="button">+</button>
+      </Link>
     );
 
     return (

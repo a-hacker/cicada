@@ -1,5 +1,6 @@
 {
   "HOME": "/",
   "TICKETS": "/tickets",
-  "SETTINGS": "/settings"
+  "SETTINGS": "/settings",
+  "NEW_PROJECT": "/create"
 }

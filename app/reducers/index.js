@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import type { HashHistory } from 'history';
+import { reducer as formReducer } from 'redux-form';
 import tickets from './tickets';
 import jiraConfig from './jiraConfig';
 import projects from './projects';
@@ -13,6 +14,7 @@ export default function createRootReducer(history: HashHistory) {
     jiraConfig,
     tickets,
     projects,
-    sidebar
+    sidebar,
+    form: formReducer
   });
 }
