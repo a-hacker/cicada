@@ -22,13 +22,13 @@ export type JiraSettings = {
 
 export type Project = {
   +projectName: string,
-  +tickets: Array<Ticket>,
+  +tickets: Map<key, Ticket>,
   +issueFilter: ?string
 };
 
 export type ProjectSettings = {
-  +projects: Array<Project>,
-  +currentProject: Project
+  +projects: Map<string, Project>,
+  +currentProject: string
 };
 
 export type GetState = () => ticketsStateType;

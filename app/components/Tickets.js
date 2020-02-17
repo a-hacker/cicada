@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Counter.css';
 import routes from '../constants/routes.json';
-import { Ticket } from '../reducers/types';
+import { Ticket, Project } from '../reducers/types';
 
 type Props = {
-  initialize: () => void,
+  refreshTickets: string => void,
+  project: Project,
   tickets: Map<string, Ticket>
 };
 
@@ -14,14 +15,16 @@ export default class Tickets extends Component<Props> {
   props: Props;
 
   componentDidMount() {
-    const { initialize } = this.props;
-    initialize();
+    const { refreshTickets, project } = this.props;
+    if (project.issueFilter !== undefined) {
+      refreshTickets(project.issueFilter);
+    }
   }
 
   render() {
-    const { tickets } = this.props;
+    const { project } = this.props;
 
-    const ticketForms = Array.from(tickets.values(), ticket => (
+    const ticketForms = Array.from(project.tickets.values(), ticket => (
       <form onSubmit={() => {}}>
         <label htmlFor={`ticket-${ticket.key}`}>
           Key:

@@ -39,11 +39,13 @@ export default class ProjectSidebar extends React.Component<Props> {
       children
     } = this.props;
 
-    const projectsContent = projects.map((project, i) => (
-      <div className="btn-group" id={`project-${i}`}>
-        <button onClick={() => setProject(project.projectName)} type="button">
-          {project.projectName}
-        </button>
+    const projectsContent = Array.from(projects.values(), project => (
+      <div className="btn-group" id={`project-${project.projectName}`}>
+        <Link to={routes.TICKETS}>
+          <button onClick={() => setProject(project.projectName)} type="button">
+            {project.projectName}
+          </button>
+        </Link>
       </div>
     ));
 
