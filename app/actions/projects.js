@@ -8,6 +8,7 @@ export const SET_PROJECT = 'SET_PROJECT';
 export const ADD_TICKET = 'ADD_TICKET';
 
 export function addProject(project: Project) {
+  settings.set(`projects.${project.projectName}`, project);
   return {
     type: ADD_PROJECT,
     context: project
