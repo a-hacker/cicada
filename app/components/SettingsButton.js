@@ -11,12 +11,10 @@ export default class Home extends Component<Props> {
 
   render() {
     return (
-      <div>
-        <div className={styles.container} data-tid="container">
-          <div className={styles.unsetContainer} data-tid="unsetContainer">
-            <Link to={routes.TICKETS}>View Tickets</Link>
-          </div>
-        </div>
+      <div className={styles.settingsButton} data-tid="settingsButton">
+        <Link to={routes.SETTINGS}>
+          <i className="fa fa-cog fa-2x" />
+        </Link>
       </div>
     );
   }

@@ -32,7 +32,6 @@
 }
 
 .settingsButton {
-  position: absolute;
-  top: 8px;
-  right: 16px;
+  display: flex;
+  justify-content: flex-end;
 }

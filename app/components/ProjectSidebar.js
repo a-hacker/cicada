@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Sidebar from 'react-sidebar';
 import { Project } from '../reducers/types';
 import routes from '../constants/routes.json';
+import contentStyles from './ProjectSidebar.css';
 
 type Props = {
   toggleSidebar: () => void,
@@ -17,10 +18,11 @@ const styles = {
   sidebar: {
     zIndex: 2,
     position: 'absolute',
+    width: '70px',
     top: 0,
     bottom: 0,
-    transition: 'transform .3s ease-out',
-    WebkitTransition: '-webkit-transform .3s ease-out',
+    transition: '',
+    WebkitTransition: '',
     willChange: 'transform',
     overflowY: 'auto',
     backgroundColor: '#0f0f0f'
@@ -40,13 +42,11 @@ export default class ProjectSidebar extends React.Component<Props> {
     } = this.props;
 
     const projectsContent = Array.from(projects.values(), project => (
-      <div className="btn-group" id={`project-${project.projectName}`}>
-        <Link to={routes.TICKETS}>
-          <button onClick={() => setProject(project.projectName)} type="button">
-            {project.projectName}
-          </button>
-        </Link>
-      </div>
+      <Link to={routes.TICKETS}>
+        <button onClick={() => setProject(project.projectName)} type="button">
+          {project.projectName}
+        </button>
+      </Link>
     ));
 
     projectsContent.push(
@@ -55,9 +55,18 @@ export default class ProjectSidebar extends React.Component<Props> {
       </Link>
     );
 
+    const projectGroup = (
+      <div
+        className={`${contentStyles.sidebar} btn-toolbar`}
+        id="project-buttons"
+      >
+        {projectsContent}
+      </div>
+    );
+
     return (
       <Sidebar
-        sidebar={projectsContent}
+        sidebar={projectGroup}
         open={sidebarOpen}
         onSetOpen={toggleSidebar}
         sidebarId="project-sidebar"

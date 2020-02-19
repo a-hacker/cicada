@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import JiraConfig from './JiraConfig';
 import routes from '../constants/routes.json';
+import ProjectSidebar from './ProjectSidebar';
 
 type Props = {};
 
@@ -11,14 +12,17 @@ export default class App extends React.Component<Props> {
 
   render() {
     return (
-      <div>
-        <div data-tid="backButton">
+      <ProjectSidebar>
+        <div
+          data-tid="backButton"
+          style={{ display: 'flex', justifyContent: 'flex-end' }}
+        >
           <Link to={routes.HOME}>
-            <i className="fa fa-arrow-left fa-3x" />
+            <i className="fa fa-times fa-3x" />
           </Link>
         </div>
         <JiraConfig />
-      </div>
+      </ProjectSidebar>
     );
   }
 }

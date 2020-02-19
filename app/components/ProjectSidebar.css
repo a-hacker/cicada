@@ -1,0 +1,12 @@
+.sidebar {
+  background-color: '#0f0f0f';
+}
+
+.sidebar button {
+  background-color: #0f0f0f;
+  color: aliceblue;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  margin: 10px 10px;
+}
