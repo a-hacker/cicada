@@ -6,14 +6,20 @@ import styles from './JiraConfig.css';
 type Props = {
   project: Project,
   currentProject: string,
-  modifyProject: (string, Project) => void
+  modifyProject: (string, Project) => void,
+  removeProject: string => void
 };
 
 export default class JiraConfig extends Component<Props> {
   props: Props;
 
   render() {
-    const { modifyProject, project, currentProject } = this.props;
+    const {
+      modifyProject,
+      project,
+      currentProject,
+      removeProject
+    } = this.props;
     return (
       currentProject !== undefined &&
       project !== undefined && (
@@ -43,6 +49,15 @@ export default class JiraConfig extends Component<Props> {
                 value={project.issueFilter}
               />
             </label>
+            <br />
+            <button
+              id="projectDelete"
+              type="button"
+              className="btn-danger"
+              onClick={() => removeProject(currentProject)}
+            >
+              Delete Project
+            </button>
           </form>
         </div>
       )

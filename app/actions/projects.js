@@ -7,6 +7,7 @@ export const ADD_PROJECT = 'ADD_PROJECT';
 export const SET_PROJECT = 'SET_PROJECT';
 export const ADD_TICKET = 'ADD_TICKET';
 export const MODIFY_PROJECT = 'MODIFY_PROJECT';
+export const REMOVE_PROJECT = 'REMOVE_PROJECT';
 
 export function addProject(project: Project) {
   settings.set(`projects.${project.projectName}`, project);
@@ -31,6 +32,16 @@ export function modifyProject(projectName: string, project: Project) {
     context: {
       projectName,
       project
+    }
+  };
+}
+
+export function removeProject(projectName: string) {
+  settings.delete(`projects.${projectName}`);
+  return {
+    type: REMOVE_PROJECT,
+    context: {
+      projectName
     }
   };
 }
