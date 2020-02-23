@@ -14,17 +14,11 @@ export default class Tickets extends Component<Props> {
     const { project } = this.props;
 
     const ticketForms = Array.from(project.tickets.values(), ticket => (
-      <form onSubmit={() => {}}>
-        <label htmlFor={`ticket-${ticket.key}`}>
-          Key:
-          <input type="text" name={`ticket-${ticket.key}`} value={ticket.key} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <button type="button">{ticket.key}</button>
     ));
 
     return (
-      <div style={style}>
+      <div className={style.ticketSidebar}>
         <div data-tid="tickets">{ticketForms}</div>
       </div>
     );
