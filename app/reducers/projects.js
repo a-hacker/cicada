@@ -1,6 +1,12 @@
 // @flow
-import { ADD_PROJECT, SET_PROJECT, ADD_TICKET } from '../actions/projects';
-import type { Action, ProjectSettings, Ticket, Project } from './types';
+import {
+  ADD_PROJECT,
+  SET_PROJECT,
+  ADD_TICKET,
+  MODIFY_PROJECT
+} from '../actions/projects';
+import type { Action, ProjectSettings, Project } from './types';
+import projectReducer from './project';
 
 export default function projectsReducer(
   state: ProjectSettings = {
@@ -30,16 +36,29 @@ export default function projectsReducer(
     }
     case ADD_TICKET: {
       const currentProject = state.projects.get(state.currentProject);
-      const tickets: Map<string, Ticket> = new Map(currentProject.tickets);
-      tickets.set(action.context.key, action.context);
-      const newProject = {
-        ...currentProject,
-        tickets
-      };
+      const newProject = projectReducer(currentProject, action);
       const newProjects = new Map(state.projects);
       newProjects.set(newProject.projectName, newProject);
       return {
         ...state,
+        projects: newProjects
+      };
+    }
+    case MODIFY_PROJECT: {
+      const oldProject = state.projects.get(action.context.projectName);
+      const newProject = projectReducer(oldProject, action);
+      const newProjects = new Map(state.projects);
+      newProjects.set(newProject.projectName, newProject);
+      if (newProject.projectName !== action.context.projectName) {
+        newProjects.delete(action.context.projectName);
+      }
+      const currentProject =
+        oldProject.projectName === state.currentProject
+          ? newProject.projectName
+          : state.currentProject;
+      return {
+        ...state,
+        currentProject,
         projects: newProjects
       };
     }

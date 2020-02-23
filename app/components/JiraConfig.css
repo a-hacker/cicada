@@ -1,9 +1,8 @@
 .settings {
   width: 100%;
-  height: 56px;
   border-radius: 4px;
-  position: relative;
-  transition: 0.3s all;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings input {

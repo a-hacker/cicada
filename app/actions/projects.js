@@ -6,6 +6,7 @@ import { Project, Ticket, Dispatch } from '../reducers/types';
 export const ADD_PROJECT = 'ADD_PROJECT';
 export const SET_PROJECT = 'SET_PROJECT';
 export const ADD_TICKET = 'ADD_TICKET';
+export const MODIFY_PROJECT = 'MODIFY_PROJECT';
 
 export function addProject(project: Project) {
   settings.set(`projects.${project.projectName}`, project);
@@ -20,6 +21,16 @@ export function setProject(projectName: string) {
     type: SET_PROJECT,
     context: {
       projectName
+    }
+  };
+}
+
+export function modifyProject(projectName: string, project: Project) {
+  return {
+    type: MODIFY_PROJECT,
+    context: {
+      projectName,
+      project
     }
   };
 }

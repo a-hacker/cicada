@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import JiraConfig from './JiraConfig';
+import ProjectConfig from './ProjectConfig';
 import routes from '../constants/routes.json';
 import ProjectSidebar from './ProjectSidebar';
 
@@ -22,6 +23,8 @@ export default class App extends React.Component<Props> {
           </Link>
         </div>
         <JiraConfig />
+        <br />
+        <ProjectConfig />
       </ProjectSidebar>
     );
   }
