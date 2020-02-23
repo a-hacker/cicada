@@ -8,7 +8,8 @@ import contentStyles from './ProjectSidebar.css';
 
 type Props = {
   toggleSidebar: () => void,
-  setProject: string => void,
+  setProject: Project => void,
+  refreshTickets: string => void,
   projects: Array<Project>,
   sidebarOpen: boolean,
   children: React.Node
@@ -35,6 +36,7 @@ export default class ProjectSidebar extends React.Component<Props> {
   render() {
     const {
       setProject,
+      refreshTickets,
       projects,
       sidebarOpen,
       toggleSidebar,
@@ -43,7 +45,13 @@ export default class ProjectSidebar extends React.Component<Props> {
 
     const projectsContent = Array.from(projects.values(), project => (
       <Link to={routes.TICKETS}>
-        <button onClick={() => setProject(project.projectName)} type="button">
+        <button
+          onClick={() => {
+            setProject(project.projectName);
+            refreshTickets(project);
+          }}
+          type="button"
+        >
           {project.projectName}
         </button>
       </Link>

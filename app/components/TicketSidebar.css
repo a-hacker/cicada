@@ -1,0 +1,10 @@
+.ticket-sidebar {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  width: 120px;
+  background-color: black;
+  left: 0;
+}

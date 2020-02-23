@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Tickets from '../components/Tickets';
+import Tickets from '../components/TicketSidebar';
 import * as ProjectActions from '../actions/projects';
 
 function mapStateToProps(state) {

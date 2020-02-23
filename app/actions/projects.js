@@ -46,19 +46,21 @@ export function removeProject(projectName: string) {
   };
 }
 
-export function addTicket(ticket: Ticket) {
+export function addTicket(projectName: string, ticket: Ticket) {
   return {
     type: ADD_TICKET,
-    context: ticket
+    context: {
+      projectName,
+      ticket
+    }
   };
 }
 
-export function refreshTickets(
-  jql: string = 'assignee = austin.hacker and status = "In Progress"'
-) {
+export function refreshTickets(project: Project) {
   const hostName = settings.get('host');
   const username = settings.get('username');
   const token = settings.get('token');
+  const jql = project.issueFilter !== undefined ? project.issueFilter : '';
   return (dispatch: Dispatch) => {
     axios
       .get(
@@ -77,7 +79,7 @@ export function refreshTickets(
       )
       .then(response => {
         return response.data.issues.forEach(issue => {
-          dispatch(addTicket(issue));
+          dispatch(addTicket(project.projectName, issue));
         });
       })
       .catch(() => {

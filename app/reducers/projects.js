@@ -37,8 +37,11 @@ export default function projectsReducer(
       };
     }
     case ADD_TICKET: {
-      const currentProject = state.projects.get(state.currentProject);
-      const newProject = projectReducer(currentProject, action);
+      const currentProject = state.projects.get(action.context.projectName);
+      const newProject = projectReducer(currentProject, {
+        type: ADD_TICKET,
+        context: action.context.ticket
+      });
       const newProjects = new Map(state.projects);
       newProjects.set(newProject.projectName, newProject);
       return {

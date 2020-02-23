@@ -9,7 +9,7 @@ import './app.global.css';
 const projectSettings = settings.get('projects');
 const projects = new Map();
 Object.entries(projectSettings).forEach(([projectName, project]) => {
-  projects.set(projectName, { tickets: [], ...project });
+  projects.set(projectName, { ...project, tickets: new Map() });
 });
 const store = configureStore({ projects: { projects, currentProject: '' } });
 
