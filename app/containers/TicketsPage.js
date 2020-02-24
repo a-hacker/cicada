@@ -1,18 +1,13 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import Tickets from '../components/TicketSidebar';
-import * as ProjectActions from '../actions/projects';
+// @flow
+import React, { Component } from 'react';
+import TicketsView from './TicketsView';
 
-function mapStateToProps(state) {
-  const { currentProject, projects } = state.projects;
+type Props = {};
 
-  return {
-    project: projects.get(currentProject)
-  };
+export default class TicketView extends Component<Props> {
+  props: Props;
+
+  render() {
+    return <TicketsView />;
+  }
 }
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(ProjectActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tickets);

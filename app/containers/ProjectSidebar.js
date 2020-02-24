@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ProjectSidebar from '../components/ProjectSidebar';
 import * as ProjectActions from '../actions/projects';
 import * as SidebarActions from '../actions/sidebar';
+import * as ViewActions from '../actions/views';
 
 function mapStateToProps(state) {
   return {
@@ -12,7 +13,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...ProjectActions, ...SidebarActions }, dispatch);
+  return bindActionCreators(
+    { ...ProjectActions, ...SidebarActions, ...ViewActions },
+    dispatch
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectSidebar);

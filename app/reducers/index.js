@@ -7,6 +7,7 @@ import tickets from './tickets';
 import jiraConfig from './jiraConfig';
 import projects from './projects';
 import sidebar from './sidebar';
+import views from './viewProvider';
 
 export default function createRootReducer(history: HashHistory) {
   return combineReducers<{}, *>({
@@ -15,6 +16,7 @@ export default function createRootReducer(history: HashHistory) {
     tickets,
     projects,
     sidebar,
+    views,
     form: formReducer
   });
 }

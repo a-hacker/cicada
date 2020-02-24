@@ -10,6 +10,7 @@ type Props = {
   toggleSidebar: () => void,
   setProject: Project => void,
   refreshTickets: string => void,
+  resetView: () => void,
   projects: Array<Project>,
   sidebarOpen: boolean,
   children: React.Node
@@ -37,6 +38,7 @@ export default class ProjectSidebar extends React.Component<Props> {
     const {
       setProject,
       refreshTickets,
+      resetView,
       projects,
       sidebarOpen,
       toggleSidebar,
@@ -48,6 +50,7 @@ export default class ProjectSidebar extends React.Component<Props> {
         <button
           onClick={() => {
             setProject(project.projectName);
+            resetView();
             refreshTickets(project);
           }}
           type="button"

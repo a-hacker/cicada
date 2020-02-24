@@ -2,6 +2,7 @@
 import axios from 'axios';
 import settings from 'electron-settings';
 import { Project, Ticket, Dispatch } from '../reducers/types';
+import parseIssueData from '../utils/ticketConveter';
 
 export const ADD_PROJECT = 'ADD_PROJECT';
 export const SET_PROJECT = 'SET_PROJECT';
@@ -63,23 +64,20 @@ export function refreshTickets(project: Project) {
   const jql = project.issueFilter !== undefined ? project.issueFilter : '';
   return (dispatch: Dispatch) => {
     axios
-      .get(
-        `${hostName}/rest/api/latest/search?${
-          jql.length > 0 ? `jql=${jql}&` : ''
-        }fields=id,key,description,summary,status`,
-        {
-          auth: {
-            username,
-            password: token
-          },
-          headers: {
-            'X-Atlassian-Token': 'nocheck'
-          }
+      .get(`${hostName}/rest/api/latest/search?jql=${jql}`, {
+        auth: {
+          username,
+          password: token
+        },
+        headers: {
+          'X-Atlassian-Token': 'nocheck'
         }
-      )
+      })
       .then(response => {
         return response.data.issues.forEach(issue => {
-          dispatch(addTicket(project.projectName, issue));
+          const ticketData = parseIssueData(issue);
+          console.log(issue);
+          dispatch(addTicket(project.projectName, ticketData));
         });
       })
       .catch(() => {

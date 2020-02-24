@@ -4,22 +4,28 @@ import { Project } from '../reducers/types';
 import style from './TicketSidebar.css';
 
 type Props = {
-  project: Project
+  project: Project,
+  updateView: Object => void
 };
 
-export default class Tickets extends Component<Props> {
+export default class TicketSidebar extends Component<Props> {
   props: Props;
 
   render() {
-    const { project } = this.props;
+    const { project, updateView } = this.props;
 
-    const ticketForms = Array.from(project.tickets.values(), ticket => (
-      <button type="button">{ticket.key}</button>
+    const tickets = Array.from(project.tickets.values(), ticket => (
+      <button
+        type="button"
+        onClick={() => updateView({ currentTicket: ticket })}
+      >
+        {ticket.key}
+      </button>
     ));
 
     return (
       <div className={style.ticketSidebar}>
-        <div data-tid="tickets">{ticketForms}</div>
+        <div data-tid="tickets">{tickets}</div>
       </div>
     );
   }

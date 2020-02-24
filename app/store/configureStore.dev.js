@@ -8,6 +8,7 @@ import * as ticketActions from '../actions/tickets';
 import * as jiraConfigActions from '../actions/jiraConfig';
 import * as projectsActions from '../actions/projects';
 import * as sidebarActions from '../actions/sidebar';
+import * as viewActions from '../actions/views';
 // import type { counterStateType, ticketsStateType } from '../reducers/types';
 
 const history = createHashHistory();
@@ -43,6 +44,7 @@ const configureStore = (initialState?: {}) => {
     ...projectsActions,
     ...sidebarActions,
     ...jiraConfigActions,
+    ...viewActions,
     ...routerActions
   };
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose

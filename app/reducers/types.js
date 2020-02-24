@@ -11,7 +11,18 @@ export type Action = {
 
 export type Ticket = {
   +summary: string,
-  +key: string
+  +key: string,
+  +description: string,
+  +status: {
+    color: string,
+    name: string
+  },
+  +assignee: string,
+  +issueType: string,
+  +project: {
+    fullName: string,
+    key: string
+  }
 };
 
 export type JiraSettings = {
