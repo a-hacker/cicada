@@ -6,7 +6,7 @@ import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
 
-const projectSettings = settings.get('projects');
+const projectSettings = settings.get('projects', {});
 const projects = new Map();
 Object.entries(projectSettings).forEach(([projectName, project]) => {
   projects.set(projectName, { ...project, tickets: new Map() });
