@@ -26,3 +26,27 @@
 .ticketSidebar button:hover {
   background-color: grey;
 }
+
+.ticketSidebar span {
+  height: 4px;
+  width: 4px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* .ticketSidebar svg {
+  margin: 0 auto;
+  text-align: left;
+} */
+
+.ticket {
+  display: flex;
+}
+
+.ticket svg {
+  vertical-align: middle;
+  align-self: center;
+  margin: 4px;
+}
