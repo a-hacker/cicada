@@ -1,13 +1,10 @@
 // @flow
 import { ADD_TICKET, MODIFY_PROJECT } from '../actions/projects';
 import type { Action, Ticket, Project } from './types';
+import createNewProject from '../utils/projectUtils';
 
 export default function projectReducer(
-  state: Project = {
-    tickets: new Map(),
-    projectName: '',
-    issueFilter: ''
-  },
+  state: Project = createNewProject(),
   action: Action
 ) {
   switch (action.type) {
