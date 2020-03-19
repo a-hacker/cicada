@@ -7,7 +7,10 @@ export default function parseIssueData(issue) {
       color: issue.fields.status.statusCategory.colorName,
       name: issue.fields.status.name
     },
-    assignee: issue.fields.assignee.displayName,
+    assignee:
+      issue.fields.assignee !== null
+        ? issue.fields.assignee.displayName
+        : 'Unassigned',
     issueType: issue.fields.issuetype.name,
     project: {
       fullName: issue.fields.project.name,

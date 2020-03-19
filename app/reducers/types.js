@@ -34,7 +34,8 @@ export type JiraSettings = {
 export type Project = {
   +projectName: string,
   +tickets: Map<key, Ticket>,
-  +issueFilter: ?string
+  +issueFilter: ?string,
+  +pinnedIssues: Array<string>
 };
 
 export type ProjectSettings = {

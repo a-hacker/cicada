@@ -5,11 +5,16 @@ import settings from 'electron-settings';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
 import './app.global.css';
+import createNewProject from './utils/projectUtils';
 
-const projectSettings = settings.get('projects');
+const projectSettings = settings.get('projects', {});
 const projects = new Map();
 Object.entries(projectSettings).forEach(([projectName, project]) => {
-  projects.set(projectName, { ...project, tickets: new Map() });
+  projects.set(projectName, {
+    ...createNewProject(),
+    ...project,
+    tickets: new Map()
+  });
 });
 const store = configureStore({ projects: { projects, currentProject: '' } });
 

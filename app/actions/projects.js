@@ -61,27 +61,57 @@ export function refreshTickets(project: Project) {
   const hostName = settings.get('host');
   const username = settings.get('username');
   const token = settings.get('token');
-  const jql = project.issueFilter !== undefined ? project.issueFilter : '';
+  const filterJql =
+    project.issueFilter !== undefined ? project.issueFilter : '';
+  const pinnedJql = project.pinnedIssues
+    .map(issue => `key="${issue}"`)
+    .join(' OR ');
   return (dispatch: Dispatch) => {
-    axios
-      .get(`${hostName}/rest/api/latest/search?jql=${jql}`, {
-        auth: {
-          username,
-          password: token
-        },
-        headers: {
-          'X-Atlassian-Token': 'nocheck'
-        }
-      })
-      .then(response => {
-        return response.data.issues.forEach(issue => {
-          const ticketData = parseIssueData(issue);
-          console.log(issue);
-          dispatch(addTicket(project.projectName, ticketData));
-        });
-      })
-      .catch(() => {
-        console.error("Couldn't do the thing.");
-      });
+    getJiraIssues(
+      hostName,
+      username,
+      token,
+      project.projectName,
+      filterJql,
+      dispatch
+    );
+    getJiraIssues(
+      hostName,
+      username,
+      token,
+      project.projectName,
+      pinnedJql,
+      dispatch
+    );
   };
+}
+
+function getJiraIssues(hostname, username, token, projectName, jql, dispatch) {
+  if (jql === '') {
+    return null;
+  }
+  return axios
+    .get(`${hostname}/rest/api/latest/search?jql=${jql}`, {
+      auth: {
+        username,
+        password: token
+      },
+      headers: {
+        'X-Atlassian-Token': 'nocheck'
+      }
+    })
+    .then(response => {
+      return processIssues(response.data.issues, projectName, dispatch);
+    })
+    .catch(error => {
+      console.warn('Failed to get tickets with query', jql);
+      console.error(error);
+    });
+}
+
+function processIssues(issues, projectName, dispatch) {
+  return issues.forEach(issue => {
+    const ticketData = parseIssueData(issue);
+    dispatch(addTicket(projectName, ticketData));
+  });
 }

@@ -9,18 +9,19 @@ import {
 } from '../actions/projects';
 import type { Action, ProjectSettings, Project } from './types';
 import projectReducer from './project';
+import createNewProject from '../utils/projectUtils';
 
 export default function projectsReducer(
   state: ProjectSettings = {
     projects: new Map(),
-    currentProject: '' // { tickets: new Map(), projectName: null, issueFilter: null }
+    currentProject: ''
   },
   action: Action
 ) {
   switch (action.type) {
     case ADD_PROJECT: {
       const newProject = {
-        tickets: [],
+        ...createNewProject(),
         ...action.context
       };
       const projects: Map<string, Project> = new Map(state.projects);
