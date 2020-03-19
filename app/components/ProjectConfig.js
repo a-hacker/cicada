@@ -22,7 +22,7 @@ class ProjectConfig extends Component<Props> {
     this.unpinIssue = this.unpinIssue.bind(this);
   }
 
-  pinIssue() {
+  pinIssue = () => {
     const {
       project,
       issueToPin,
@@ -34,14 +34,14 @@ class ProjectConfig extends Component<Props> {
     currentPins.push(issueToPin);
     modifyProject(currentProject, { pinnedIssues: currentPins });
     setIssue('');
-  }
+  };
 
-  unpinIssue(issue: string) {
+  unpinIssue = (issue: string) => {
     const { project, currentProject, modifyProject } = this.props;
     let currentPins = project.pinnedIssues;
     currentPins = currentPins.filter(pin => pin !== issue);
     modifyProject(currentProject, { pinnedIssues: currentPins });
-  }
+  };
 
   render() {
     const {
